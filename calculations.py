@@ -1,10 +1,37 @@
 
 
-def error_calc(x, xm, x_dot, xm_dot):
-    return x - xm, x_dot - xm_dot
+def error_calc(x, xr, x_dt, xr_dt):
+    """
+
+    :param x:
+    :param xr:
+    :param x_dt:
+    :param xr_dt:
+    :return:
+    """
+    err = x - xr
+    err_d = x_dt - xr_dt
+    return err, err_d
 
 
 def controller(x, xm, x_dot, xm_dot, xm_ddot, m, lamda0, K, k1, k2, c1, c2, params):
+    """
+
+    :param x:
+    :param xm:
+    :param x_dot:
+    :param xm_dot:
+    :param xm_ddot:
+    :param m:
+    :param lamda0:
+    :param K:
+    :param k1:
+    :param k2:
+    :param c1:
+    :param c2:
+    :param params:
+    :return:
+    """
     e, e_dot = error_calc(x, xm, x_dot, xm_dot)
     xr_ddot = xm_ddot - lamda0 * e_dot
     z = e_dot + lamda0 * e
@@ -14,6 +41,13 @@ def controller(x, xm, x_dot, xm_dot, xm_ddot, m, lamda0, K, k1, k2, c1, c2, para
     return u, xr_ddot, z
 
 
-def euler_integration(y, y_dot, dt):
-    return y + y_dot * dt
+def euler_integration(y, y_dt, dt):
+    """
+
+    :param y:
+    :param y_dot:
+    :param dt:
+    :return:
+    """
+    return y + y_dt * dt
 
