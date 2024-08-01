@@ -51,3 +51,11 @@ def euler_integration(y, y_dt, dt):
     """
     return y + y_dt * dt
 
+
+def adaptation_law(gamma, z, xr_ddot, x, x_dot):
+    m_hat_dot = - gamma * z * xr_ddot
+    k1_hat_dot = - gamma * z * x
+    k2_hat_dot = - gamma * z * (x ** 3)
+    c1_hat_dot = - gamma * z * x_dot
+    c2_hat_dot = - gamma * z * (x_dot ** 2)
+    return m_hat_dot, k1_hat_dot, k2_hat_dot, c1_hat_dot, c2_hat_dot
